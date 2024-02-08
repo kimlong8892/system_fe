@@ -58,16 +58,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions('login', ['login']), // Assuming 'login' is the name of your Vuex module
+    ...mapActions([
+      'login',
+    ]),
 
     submitLogin() {
       const credentials = {
         username: this.username,
         password: this.password
       };
-
       this.login(credentials)
-        .then(() => {
+        .then((res) => {
+          console.log(res)
           // Login successful, you can navigate to another page or perform any other actions
         })
         .catch(error => {
