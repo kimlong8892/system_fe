@@ -1,32 +1,30 @@
-import Vue from "vue";
-import Vuex from 'vuex';
-import VueRouter from "vue-router";
-import App from "./App.vue";
-import LightBootstrap from "./light-bootstrap-main";
-import routes from "./routes/routes";
-import "./registerServiceWorker";
-import login from './store/auth/login';
+import { createApp } from 'vue';
+import AppAdmin from './MainAppAdmin';
+import AppWeb from './MainAppWeb';
+import routerAdmin from './router/AdminRoute';
+import store from "./store/index";
+import i18n from "@/i18n";
+import './styles/app.css';
+import '../public/fontawesome/css/all.css';
+import { createMetaManager } from 'vue-meta';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import webRoute from "@/router/WebRoute";
 
-Vue.use(Vuex);
-Vue.use(VueRouter);
-Vue.use(LightBootstrap);
+const firstPathUrl = window.location.pathname.split('/').filter(n => n)[0] ?? '';
 
-const router = new VueRouter({
-  mode: "history", // Enable HTML5 history mode
-  routes,
-  linkActiveClass: "nav-item active",
-  scrollBehavior: (to) => {
-    if (to.hash) {
-      return { selector: to.hash };
-    } else {
-      return { x: 0, y: 0 };
-    }
-  },
-});
-
-new Vue({
-  login,
-  el: "#app",
-  render: (h) => h(App),
-  router,
-});
+if (firstPathUrl === 'admin') {
+    const app = createApp(AppAdmin);
+    app.use(routerAdmin);
+    app.use(store);
+    app.use(i18n);
+    app.use(createMetaManager());
+    app.use(CKEditor);
+    app.mount('#app');
+} else {
+    const app = createApp(AppWeb);
+    app.use(webRoute);
+    app.use(store);
+    app.use(i18n);
+    app.use(createMetaManager());
+    app.mount('#app');
+}

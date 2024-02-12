@@ -1,0 +1,103 @@
+/* ./src/styles/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-red {
+    color: red;
+}
+
+.d-inline {
+    display: inline;
+}
+
+#footer-main {
+    padding: 15px;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background: black;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.text-success {
+    color: green;
+}
+
+.table-bordered {
+    border: 1px solid #ddd !important;
+    width: 100%;
+}
+
+.table-bordered tr td, .table-bordered tr th {
+    padding: 15px;
+    border: 1px solid #ddd !important;
+}
+
+.table-bordered tr th {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+.ck-editor__editable {
+    height: 500px;
+}
+
+.main-left {
+    width: 12% !important;
+    height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-left {
+        width: 20% !important;
+    }
+
+    .main-right {
+        width: 80% !important;
+    }
+
+    .main-left li span {
+        display: none;
+    }
+}
+
+.main-right {
+    width: 88% !important;
+    height: auto;
+    padding: 1rem;
+    max-width: 88% !important;
+}
+
+.main-app {
+    min-height: 100vh;
+}
+
+.bg-success {
+    background: green;
+}
+
+.w-50-present {
+    width: 50% !important;
+}
+
+.pl-10 {
+    padding-left: 10% !important;
+}
+
+.pr-10 {
+    padding-right: 10% !important;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+
+.container-app-web {
+    padding-top: 50px;
+}
