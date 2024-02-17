@@ -9,13 +9,10 @@
                         <img class="w-50 mr-2 rounded-full d-inline" src="/images/avatar.png" alt="logo">
                     </div>
                     <h1 class="text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        {{ $t('FORGOT_PASSWORD') }}
+                        {{ $t('LOGIN') }}
                     </h1>
-
                     <ErrorAlert v-if="this.getError" :error="$t(this.getError)"/>
-                    <SuccessAlert v-if="this.getSuccess" :success="$t('FORGOT_PASSWORD_SUCCESS', {'email': this.email})"/>
-
-                    <form class="space-y-4 md:space-y-6" @submit.prevent="submitForgotPassword">
+                    <form class="space-y-4 md:space-y-6" @submit.prevent="submitLogin">
                         <InputField name="email"
                                     :modelValue="this.email"
                                     @update:modelValue="this.email = $event; validate();"
@@ -23,7 +20,16 @@
                                     type="text"
                                     label="EMAIL"
                                     :required="true"
-                        />
+                                    />
+
+                        <InputField name="password"
+                                    :modelValue="this.password"
+                                    @update:modelValue="this.password = $event; validate();"
+                                    :error="this.errors.password"
+                                    type="password"
+                                    label="PASSWORD"
+                                    :required="true"
+                                    />
                         <div>
                             <vue-recaptcha @verify="verifyCaptcha" class="w-100"
                                            ref="recaptcha"
@@ -31,13 +37,14 @@
                                            :sitekey="this.recaptchaSiteKey"></vue-recaptcha>
                             <p class="text-red" v-if="errors.recaptcha">{{ $t(errors.recaptcha) }}</p>
                         </div>
-                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {{ $t('FORGOT_PASSWORD') }}
+                        <button type="submit"
+                                class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            {{ $t('LOGIN') }}
                         </button>
                         <div class="text-right mt-0">
-                            <RouterLink to="/admin/login"
+                            <RouterLink to="/admin/forgot-password"
                                         class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                {{ $t('LOGIN') }}
+                                {{ $t('FORGOT_PASSWORD') }}?
                             </RouterLink>
                         </div>
                     </form>
@@ -48,34 +55,34 @@
 </template>
 
 <script>
-import {isEmail} from "@/helpers/functions";
-import { VueRecaptcha } from 'vue-recaptcha';
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import {useMeta} from "vue-meta";
+import {isEmail} from "@/helpers/functions";
+import {VueRecaptcha} from 'vue-recaptcha';
 import Loading from 'vue-loading-overlay';
-import InputField from "@/components/Admin/Include/InputField";
-import SuccessAlert from "@/components/Admin/Include/SuccessAlert";
-import ErrorAlert from "@/components/Admin/Include/ErrorAlert";
-import i18n from "@/i18n";
+import 'vue-loading-overlay/dist/css/index.css';
+import {useMeta} from 'vue-meta'
+import InputField from "@/views/Admin/Include/InputField";
+import ErrorAlert from "@/views/Admin/Include/ErrorAlert";
+import i18n from '../../../i18n';
 
 export default {
     setup() {
         useMeta({
-            title: i18n.t('Admin forgot password')
+            title: i18n.t('Admin login')
         });
     },
-    name: 'AdminForgotPassword',
+    name: 'AdminLogin',
     computed: {
-        ...mapGetters('AdminForgotPasswordStore', [
+        ...mapGetters('AdminLoginStore', [
             'getError',
-            'getLoading',
-            'getSuccess'
-        ]),
+            'getLoading'
+        ])
     },
-    components: {SuccessAlert, VueRecaptcha, Loading, ErrorAlert, InputField},
+    components: {VueRecaptcha, Loading, InputField, ErrorAlert},
     data() {
         return {
             email: '',
+            password: '',
             errors: [],
             recaptcha: '',
             recaptchaSiteKey: process.env.VUE_APP_RECAPTCHA_SITE_KEY
@@ -84,7 +91,6 @@ export default {
     methods: {
         validate() {
             let isInvalid = false;
-
             this.errors = [];
 
             if (this.email === '') {
@@ -95,6 +101,11 @@ export default {
                 isInvalid = true;
             }
 
+            if (this.password === '') {
+                this.errors.password = 'FIELD_IS_REQUIRED';
+                isInvalid = true;
+            }
+
             if (this.recaptcha === '') {
                 this.errors.recaptcha = 'FIELD_IS_REQUIRED';
                 isInvalid = true;
@@ -102,18 +113,19 @@ export default {
 
             return isInvalid;
         },
-        submitForgotPassword() {
+        submitLogin() {
+            this.setError('');
             const isInvalid = this.validate();
 
             if (!isInvalid) {
-                this.forgotPassword({
-                    email: this.email, recaptcha: this.recaptcha
+                this.login({
+                    email: this.email, password: this.password, recaptcha: this.recaptcha
                 });
                 this.resetCaptcha();
             }
         },
-        ...mapActions('AdminForgotPasswordStore', ['forgotPassword']),
-        ...mapMutations('AdminForgotPasswordStore', ['setLoading', 'setError']),
+        ...mapActions('AdminLoginStore', ['login']),
+        ...mapMutations('AdminLoginStore', ['setLoading', 'setError']),
         verifyCaptcha(response) {
             this.recaptcha = response;
             this.validate();
@@ -122,6 +134,11 @@ export default {
             this.$refs.recaptcha.reset();
             this.recaptcha = '';
         },
-    }
+    },
 }
 </script>
+
+<style scoped>
+
+
+</style>

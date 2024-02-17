@@ -61,9 +61,9 @@
 
 <script>
     import { VueRecaptcha } from 'vue-recaptcha';
-    import InputField from "@/components/Admin/Include/InputField";
-    import SuccessAlert from "@/components/Admin/Include/SuccessAlert";
-    import ErrorAlert from "@/components/Admin/Include/ErrorAlert";
+    import InputField from "@/views/Admin/Include/InputField";
+    import SuccessAlert from "@/views/Admin/Include/SuccessAlert";
+    import ErrorAlert from "@/views/Admin/Include/ErrorAlert";
     import {mapActions, mapGetters, mapMutations} from "vuex";
     import Loading from 'vue-loading-overlay';
     import {useMeta} from "vue-meta";

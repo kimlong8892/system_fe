@@ -16,8 +16,8 @@ import i18n from "@/i18n";
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import Loading from 'vue-loading-overlay';
 import {setGetParam} from "@/helpers/functions";
-import PaginationCustom from "@/components/Include/Pagination";
-import ListPost from "@/components/Web/Post/ListPost";
+import PaginationCustom from "@/views/Include/Pagination";
+import ListPost from "@/views/Web/Post/ListPost";
 
 let isLoadFirst = false;
 

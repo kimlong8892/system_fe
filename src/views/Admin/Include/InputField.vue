@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import RequiredIcon from "@/components/Admin/Include/RequiredIcon";
+    import RequiredIcon from "@/views/Admin/Include/RequiredIcon";
 
     export default {
         name: 'InputField',

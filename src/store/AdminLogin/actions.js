@@ -11,8 +11,9 @@ export default {
         })
         .then(response => {
             // eslint-disable-next-line no-prototype-builtins
-            if (response.data.hasOwnProperty('access_token')) {
+            if (response.data.hasOwnProperty('access_token') && response.data.hasOwnProperty('refresh_token')) {
                 localStorage.setItem('admin_access_token', response.data.access_token);
+                localStorage.setItem('admin_refresh_token', response.data.refresh_token);
                 window.location.replace(window.location.origin + '/admin/home');
             }
         })

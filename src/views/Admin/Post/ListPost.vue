@@ -92,8 +92,8 @@ import Loading from 'vue-loading-overlay';
 import {useMeta} from 'vue-meta'
 import i18n from "@/i18n";
 import {setGetParam} from "@/helpers/functions";
-import ErrorAlert from "@/components/Admin/Include/ErrorAlert.vue";
-import PaginationCustom from "@/components/Include/Pagination";
+import ErrorAlert from "@/views/Admin/Include/ErrorAlert.vue";
+import PaginationCustom from "@/views/Include/Pagination";
 let isLoadFirst = false;
 
 export default {

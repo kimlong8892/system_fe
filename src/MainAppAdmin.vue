@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import AdminHeader from "@/components/Admin/Include/Header";
+    import AdminHeader from "@/views/Admin/Include/Header";
     import {mapActions, mapGetters} from "vuex";
     import {siteName} from "@/helpers/functions";
 

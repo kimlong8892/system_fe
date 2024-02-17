@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import RequiredIcon from "@/components/Admin/Include/RequiredIcon.vue";
+import RequiredIcon from "@/views/Admin/Include/RequiredIcon.vue";
 import {ckeditorConfig} from "@/helpers/functions";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

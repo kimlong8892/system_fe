@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AdminNotFound from "@/components/Admin/404/NotFound.vue";
-import WebHome from "@/components/Web/Home/Home";
-import PostDetail from "@/components/Web/Post/PostDetail";
+import AdminNotFound from "@/views/Admin/404/NotFound.vue";
+import WebHome from "@/views/Web/Home/Home";
+import PostDetail from "@/views/Web/Post/PostDetail";
 
 const AdminRouter = [
     {

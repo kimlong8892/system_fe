@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import PostItemList from "@/components/Web/Post/PostItemInList";
+    import PostItemList from "@/views/Web/Post/PostItemInList";
     import {mapGetters} from "vuex";
     export default {
         name: 'ListPost',
