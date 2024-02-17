@@ -81,8 +81,8 @@ export default {
     components: {VueRecaptcha, Loading, InputField, ErrorAlert},
     data() {
         return {
-            email: '',
-            password: '',
+            email: 'admin@gmail.com',
+            password: 'admin@Admin123',
             errors: [],
             recaptcha: '',
             recaptchaSiteKey: process.env.VUE_APP_RECAPTCHA_SITE_KEY
